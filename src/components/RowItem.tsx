@@ -4,7 +4,11 @@ import { useRefs } from "../context/refContext";
 import { useStableCallback } from "../hooks/useStableCallback";
 import { RenderItem } from "../types";
 import { typedMemo } from "../utils";
-import { Gesture, PanGesture, TapGesture } from "react-native-gesture-handler";
+import {
+  Gesture,
+  LongPressGesture,
+  PanGesture,
+} from "react-native-gesture-handler";
 import { SharedValue, runOnJS } from "react-native-reanimated";
 
 type Props<T> = {
@@ -41,12 +45,12 @@ function RowItem<T>(props: Props<T>) {
 
   const { renderItem, item, itemKey, panGesture, enabled, extraData } = props;
 
-  const tapGesture = Gesture.Tap()
-    .onTouchesDown(() => {
+  const longPressGesture = Gesture.LongPress()
+    .onStart(() => {
       enabled.value = true;
       runOnJS(drag)();
     })
-    .onTouchesUp(() => {
+    .onTouchesDown(() => {
       enabled.value = false;
     })
     .simultaneousWithExternalGesture(panGesture);
@@ -61,7 +65,7 @@ function RowItem<T>(props: Props<T>) {
       renderItem={renderItem}
       item={item}
       getIndex={getIndex}
-      tapGesture={tapGesture}
+      longPressGesture={longPressGesture}
       extraData={extraData}
     />
   );
@@ -74,7 +78,7 @@ type InnerProps<T> = {
   item: T;
   getIndex: () => number | undefined;
   renderItem: RenderItem<T>;
-  tapGesture: TapGesture;
+  longPressGesture: LongPressGesture;
   extraData?: any;
 };
 

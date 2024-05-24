@@ -6,7 +6,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { useAnimatedValues } from "./context/animatedValueContext";
-import { FlatList, TapGesture } from "react-native-gesture-handler";
+import { FlatList, LongPressGesture } from "react-native-gesture-handler";
 import Animated, {
   AnimateProps,
   WithSpringConfig,
@@ -58,7 +58,7 @@ export declare type RenderPlaceholder<T> = (params: {
 export declare type RenderItemParams<T> = {
   item: T;
   getIndex: () => number | undefined;
-  tapGesture: TapGesture;
+  longPressGesture: LongPressGesture;
   isActive: boolean;
 };
 export declare type RenderItem<T> = (

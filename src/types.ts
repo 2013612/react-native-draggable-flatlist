@@ -6,7 +6,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { useAnimatedValues } from "./context/animatedValueContext";
-import { FlatList, TapGesture } from "react-native-gesture-handler";
+import { FlatList, LongPressGesture } from "react-native-gesture-handler";
 import Animated, {
   AnimateProps,
   WithSpringConfig,
@@ -63,7 +63,7 @@ export type RenderPlaceholder<T> = (params: {
 export type RenderItemParams<T> = {
   item: T;
   getIndex: () => number | undefined; // This is technically a "last known index" since cells don't necessarily rerender when their index changes
-  tapGesture: TapGesture;
+  longPressGesture: LongPressGesture;
   isActive: boolean;
 };
 
